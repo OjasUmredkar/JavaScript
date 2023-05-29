@@ -1,0 +1,173 @@
+<!-- Q8.
+Problem statement 8: Create an online form to gather feedback from the users on problems or difficulties
+they have faced while purchasing items in a sports website. The information of the client will be sent via email to
+an email address pre-established in the source code of the online form.
+The webpage will be as follows:
+A. The heading will display the name of the members of the group
+B. The body section will have:
+• An introductory sentence, above the form, informing the end user about the aim to the online
+form and the instructions to fill in out
+• The web form has following inputs:
+i. Type of problem: technical (e.g. website is down), product do not available, missing
+information about the product
+ii. Username (mandatory)
+iii. Email (mandatory)
+iv. Location (mandatory)
+v. Phone (optional)
+vi. Description of the problem (mandatory)
+vii. Notification of problem solved (optional)
+The mandatory field will have a red asterisk next to the text label. Provide a submit button. -->
+
+<html>
+    <head>
+        <h2 align="center">Feedback</h2>
+       <style>
+        span{
+            color: red;
+        }
+       </style>
+       <script>
+            var name;
+           
+            var str;
+            var email;
+            var location;
+            var description;
+            function validateUserName(){
+                name=document.getElementById("username").value
+                if(name==="" || (name.trim().length===0)){
+                    document.getElementById("errname").innerHTML="Enter the username"
+                    return false;
+                }
+                document.getElementById("errname").innerHTML="";
+                return true;
+            }
+
+
+            function validateproblem(){
+                var problem=document.getElementsByName("Problem")
+                str="";
+                for(var i=0;i<problem.length;i++){
+                    console.log(problem[i].value)
+                    if(problem[i].checked){
+                        str+=problem[i].value+", "
+                       
+                       
+                    }
+                }
+                if(str===""){
+                    document.getElementById("errproblem").innerHTML="Mark the problem you are facing ";
+                    return false;
+                }
+                else{
+                    document.getElementById("errproblem").innerHTML="";
+                    return true;
+                }
+            }
+
+
+            function validateEmail(){
+                email=document.getElementById("email").value;
+                if(email!=="" && email.match(/^.*@.*$/) && (email.trim().length!==0)){
+                    document.getElementById("erremail").innerHTML=""
+                    return true;;
+                }
+                document.getElementById("erremail").innerHTML="Enter valid email";
+                return false;
+
+
+
+
+            }
+
+
+          function validateLocation(){
+                locat=document.getElementById("location").value;
+                if(locat==="" || (locat.trim().length===0)){
+                    document.getElementById("errlocation").innerHTML="<br>Enter your location"
+                    return false;
+                }
+               
+                document.getElementById("errlocation").innerHTML=""
+                return true;
+               
+            }
+            function validatediscription(){
+                description=document.getElementById("description").value;
+                if(description==="" || (description.trim().length===0)){
+                    document.getElementById("errdescription").innerHTML="<br>Enter description of problem"
+                    return false;
+                }
+               
+                document.getElementById("errdescription").innerHTML=""
+                return true;
+
+
+            }
+
+
+            function validateData(){
+                var flag1=validateUserName();
+                var flag2=validateproblem();
+                var flag3=validateEmail();
+                var flag4=validateLocation();
+                var flag5=validatediscription()
+                if(flag1 && flag2 &flag3 && flag4){
+                    document.getElementById("mydiv").innerHTML="User Name : "+name+"<br>Problems faced: "+str +"<br>Email : "+email+"<br>Location : "+location;
+                }
+            }
+
+
+       </script>
+    </head>
+    <body>
+        <div>
+            <h2 align="center">Online form to gather feedback from the users on problems or difficulties
+                they have faced while purchasing items in a sports website.</h2>
+        </div>
+        <form action="" align="center">
+        <table width="50%" cellspacing="30px" align="center">
+            <tr>
+                <td>Problem: </td>
+                <td><input type="checkbox" name="Problem" id="TECHNICAL ISSUE" value="TECHNICAL ISSUE"><Label for="TECHNICAL ISSUE">TECHNICAL ISSUE</Label><br>
+                     <input type="checkbox" name="Problem" id="PRODUCT NOT AVAILABLE" value="PRODUCT NOT AVAILABLE"><Label for="PRODUCT NOT AVAILABLE">PRODUCT NOT AVAILABLE</Label><br>
+                     <input type="checkbox" name="Problem" id="MISSING INFORMATION ABOUT PRODUCT" value="MISSING INFORMATION ABOUT PRODUCT"><Label for="MISSING INFORMATION ABOUT PRODUCT">MISSING INFORMATION ABOUT PRODUCT</Label><br>
+                     <span name="errproblem" id="errproblem"></span>
+                    </td>
+            </tr>
+            <tr>
+                <td>User Name:</td>
+                <td><input type="text" name="username" id="username"><span>*</span><span name="errname" id="errname"></span></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="email" id="email"><span>*</span><span name="erremail" id="erremail"></span></td>
+            </tr>
+            <tr>
+                <td>Location:</td>
+                <td><textarea name="location" id="location" cols="50" rows="5"></textarea><span>*</span><span  id="errlocation"></span></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" name="phone" id="phone" pattern="[0-9]"></td>
+            </tr>
+            <tr>
+                <td>Discription of problem:</td>
+                <td><textarea name="description" id="description" cols="50" rows="5"></textarea><span>*</span><span name="errdescription" id="errdescription"></span></td>
+            </tr>
+
+
+        </table>
+        <button type="button" name="btn" id="btn" value="btn" onclick="validateData()">Submit</button>
+
+
+        </form>
+        <div id="mydiv">
+
+
+        </div>
+       
+       
+    </body>
+</html>
+

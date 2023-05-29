@@ -1,0 +1,224 @@
+<html>
+   
+        <head>
+            <style>
+                #tb{
+                    background-color: rgb(228, 152, 152);
+                   
+                }
+              
+            </style>
+            <script> 
+                var nm;
+                var dept;
+                var empcode;
+                var address;
+                var tpa;
+                var courses;
+                var val;
+                var coursesneeded;
+               
+                function validateName(){
+                    nm=document.getElementById("name").value;
+                    if(nm===" "||(nm.trim().length===0)){
+                        document.getElementById("errname").innerHTML="<br>*Enter name"
+                        return false;
+                    }
+                    document.getElementById("errname").innerHTML=""
+                    return true;
+                }
+
+
+                function validateEmpCode(){
+                    empcode=document.getElementById("ecode").value;
+                    if(empcode===" "||empcode.trim().length==0){
+                        document.getElementById("errecode").innerHTML="<br>*Enter ecode"
+                        return false;
+                    }
+                    document.getElementById("errecode").innerHTML=""
+                    return true;
+                }
+
+
+
+
+
+
+                function validateDepartment(){
+                    var arr=document.getElementsByName("department")
+                    for(var i=0;i<arr.length;i++){
+                        if(arr[i].checked){
+                            dept=arr[i].value
+                            document.getElementById("errmess").innerHTML=""
+                            return true ;                      
+                        }
+
+
+                    }
+                    document.getElementById("errmess").innerHTML="*please select department"
+                    return false;
+
+
+                }
+
+
+                function validateAddress(){
+                    address=document.getElementById("address").value;
+                    if( address==""||( address.trim().length===0)){
+                        document.getElementById("erradd").innerHTML="<br>*Enter Address"
+                        return false;
+                    }
+                    document.getElementById("erradd").innerHTML=""
+                    return true;
+                }
+
+
+                function validateTPA(){
+                    tpa=document.getElementsByName("tpa");
+                    courses="";
+                   
+                    for(var i=0;i<tpa.length;i++){
+                        if(tpa[i].checked){
+                            courses+=tpa[i].value+", ";
+                           
+                        }
+                    }
+                    if( courses===""){
+                        document.getElementById("errtpa").innerHTML="<br>*Enter the training programmes attended"
+                        return false;
+                    }
+
+                    document.getElementById("errtpa").innerHTML="";
+                    courses=courses.slice(0,courses.length-2)
+                   
+                    return true;
+                }
+
+                function validateTNPA(){
+                    val=document.getElementById("tnpa").value;
+                    
+                    if(val==="notselected"){
+                        document.getElementById("errtnpa").innerHTML="<br>*Select an options";
+                        return false;
+                    }
+                    document.getElementById("errtnpa").innerHTML="";
+                    return true;
+                    
+                }
+                
+
+                
+
+                function validateData(){
+                    var flag=validateDepartment();
+                    var flag2=validateName();
+                    var flag3=validateEmpCode();
+                    var flag4=validateAddress();
+                    var flag5=validateTPA();
+                    var flag6=validateTNPA();
+                    var date=document.getElementById("join").value;
+                    if(flag && flag2 &&flag3 && flag4 && flag5 && flag6){
+                        document.getElementById("mydiv").innerHTML="Name : "+nm +"<br>Department : "+dept +"Date of joining : "+date+"<br>Employee Code : "+empcode+"<br>Address : "+address +"<br>Training Programmes attended : "+courses+"<br>Training Programmes Need to be Attended : "+val;
+                    }
+                    else{
+                     
+                    }
+                   
+                }
+
+
+               
+            </script>
+
+
+
+
+        </head>
+        <body>
+          <form name="frm">
+            <table id="tb" border="2px" width ="30%">
+
+
+
+
+                <tbody>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" id="name" ><span name="errname" id="errname"  style="color:royalblue" required></span></td>
+                    </tr>
+                    <tr>
+                        <td>Employee code</td>
+                        <td><input type="text" name="ecode" id="ecode" ><span name="errecode" id="errecode"  style="color:royalblue" required></span></td>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                       
+                        <td>
+                            <input type="radio" name="department" id="ADMIN" value="ADMIN"><label for="ADMIN">ADMIN</label><br>
+                            <input type="radio" name="department" id="HR" value="HR"><label for="HR">HR</label><br>
+                            <input type="radio" name="department" id="TECHNICAL" value="TECHNICAL"><label for="TECHNICAL">TECHNICAL</label><br>
+                            <input type="radio" name="department" id="ACCOUNT" value="ACCOUNT"><label for="ACCOUNT">ACCOUNT</label><br>
+                            <span name="errmess" id="errmess" style="color:royalblue"></span>
+                        </td>
+
+
+
+
+                    </tr>
+                    <tr>
+                        <td>Date Of Joining:</td>
+                        <td><Input type="date" name="joining" id="join" value="joiningdate" ></td>
+                    </tr>
+                    <tr>
+                        <td>Address: </td>
+                        <td><textarea name="address" id="address" cols="30" rows="5"></textarea><span name="erradd" id="erradd" style="color:royalblue"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Training Programs Attended: </td>
+                        <td>
+                            <input type="checkbox" name="tpa" id="html" value="HTML/DHTML" ><label for="html">HTML/DHTML</label><br>
+                            <input type="checkbox" name="tpa" id="java" value="JAVA"><label for="java">JAVA</label><br>
+                            <input type="checkbox" name="tpa" id="cs" value=""><label for="CLIENT/SERVER">CLIENT/SERVER</label><br>
+                            <input type="checkbox" name="tpa" id=".net" value=".net"><label for=".NET">.NET</label><br>
+                            <span name="errtpa" id="errtpa" style="color:royalblue"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Training Programmes Need to be Attended: </td>
+                        <td><select name="tnpa" id="tnpa">
+                                <option value="notselected">--select--</option>
+                                <option value="JAVASCRIPT">JAVASCRIPT</option>
+                                <option value="JAVASTRUT">JAVASTRUT</option>
+                                <option value="DBMS">DBMS</option>
+                                <option value="REACT">REACT</option>
+                             </select>
+                             <span name="errtnpa" id="errtnpa" style="color:royalblue"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Send Information At:</td>
+                        <td><a href="">empinfo@gmail.com</a></td>
+                    </tr>
+
+
+                    
+                </tbody>
+               
+            </table>
+            <div id="submit" >
+                <button type="button" name="btn" id="btn" value="btn" onclick="validateData()">Submit</button>
+            </div>
+            <div id="mydiv" >
+
+
+            </div>
+
+
+
+          </form>
+        </body>
+   
+</html>
+
+
+
